@@ -16,12 +16,14 @@ qt_add_shaders(ShaderEffects "shaders"
     PREFIX "/"
     FILES
         GenieEffect.vert
+        RippleEffect.frag
 )
 
 qt_add_qml_module(ShaderEffects
     URI ShaderEffects
     VERSION 1.0
     QML_FILES GenieEffect.qml
+    QML_FILES RippleEffect.qml
 )
 
 target_link_libraries(ShaderEffects PRIVATE Qt${QT_VERSION_MAJOR}::Quick)

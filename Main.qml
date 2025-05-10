@@ -13,7 +13,7 @@ Window {
     ListView {
         anchors.fill: parent
 
-        model: [genieEffectImage]
+        model: [rippleEffectImage, genieEffectImage]
 
         delegate: Loader {
             sourceComponent: modelData
@@ -40,6 +40,7 @@ Window {
                 id: genieEffect
                 anchors.fill: parent
                 source: sourceImage
+                side: (button.x + button.width/2)/screen.width
             }
 
             Rectangle {
@@ -57,6 +58,7 @@ Window {
                 }
 
                 MouseArea {
+                    id: mouseArea
                     anchors.fill: parent
 
                     drag.target: button
@@ -65,10 +67,40 @@ Window {
                     drag.maximumX: screen.width - button.width
 
                     onClicked: {
-                        genieEffect.side = (button.x + button.width/2)/screen.width
                         genieEffect.minimized = !genieEffect.minimized
                     }
                 }
+            }
+        }
+    }
+
+    Component {
+        id: rippleEffectImage
+        Rectangle {
+            id: screen
+            width: root.width
+            height: root.height
+            color: "gray"
+
+            Image {
+                id: sourceImage
+                visible: false
+                width: parent.width
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+            }
+
+            RippleEffect {
+                id: rippleEffect
+                anchors.fill: parent
+                source: sourceImage
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: mouse => {
+                        rippleEffect.addRipple(mouse.x / screen.width, mouse.y / screen.height)
+                    }
             }
         }
     }
