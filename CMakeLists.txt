@@ -15,8 +15,9 @@ qt_add_executable(appShaderEffectsQMLPlayground
 qt_add_qml_module(appShaderEffectsQMLPlayground
     URI ShaderEffectsQMLPlayground
     VERSION 1.0
-    QML_FILES
-        Main.qml
+    RESOURCES
+        images/Mount_Kirkjufell_Iceland.jpg
+    QML_FILES Main.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -30,8 +31,12 @@ set_target_properties(appShaderEffectsQMLPlayground PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+add_subdirectory(ShaderEffects)
+
 target_link_libraries(appShaderEffectsQMLPlayground
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Qt6::Quick
+        ShaderEffects
 )
 
 include(GNUInstallDirs)
