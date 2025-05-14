@@ -13,7 +13,7 @@ Window {
     ListView {
         anchors.fill: parent
 
-        model: [rippleEffectImage, genieEffectImage]
+        model: [bloomEffectImage, rippleEffectImage, genieEffectImage]
 
         delegate: Loader {
             sourceComponent: modelData
@@ -99,9 +99,46 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: mouse => {
-                        rippleEffect.addRipple(mouse.x / screen.width, mouse.y / screen.height)
-                    }
+                               rippleEffect.addRipple(mouse.x / screen.width, mouse.y / screen.height)
+                           }
             }
+        }
+    }
+
+    Component {
+        id: bloomEffectImage
+        BloomEffect {
+            Column {
+                spacing: 12
+                Row {
+                    Text {
+                        text: "Threshold"
+                        color: "white"
+                    }
+                    Slider {
+                        id: thresholdSlider
+                        value: 0.5
+                        from: 0.0
+                        to: 1.0
+                    }
+                }
+                Row {
+                    Text {
+                        text: "Intensity"
+                        color: "white"
+                    }
+                    Slider {
+                        id: intensitySlider
+                        value: 0.5
+                        from: 0.0
+                        to: 10.0
+                    }
+                }
+            }
+            intensity: intensitySlider.value
+            threshold: thresholdSlider.value
+
+            source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
         }
     }
 }

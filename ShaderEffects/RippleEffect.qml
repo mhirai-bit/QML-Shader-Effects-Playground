@@ -77,23 +77,23 @@ ShaderEffect {
         switch(root.currentRippleIndex) {
         case 0:
             rippleCenter1 = Qt.vector2d(x, y)
-            rippleTime1Anim.start()
+            rippleTime1Anim.restart()
             break
         case 1:
             rippleCenter2 = Qt.vector2d(x, y)
-            rippleTime2Anim.start()
+            rippleTime2Anim.restart()
             break
         case 2:
             rippleCenter3 = Qt.vector2d(x, y)
-            rippleTime3Anim.start()
+            rippleTime3Anim.restart()
             break
         case 3:
             rippleCenter4 = Qt.vector2d(x, y)
-            rippleTime4Anim.start()
+            rippleTime4Anim.restart()
             break
         case 4:
             rippleCenter5 = Qt.vector2d(x, y)
-            rippleTime5Anim.start()
+            rippleTime5Anim.restart()
             break
         default:
             console.log("Ripple limit reached")
