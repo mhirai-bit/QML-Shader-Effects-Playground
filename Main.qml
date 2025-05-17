@@ -13,7 +13,12 @@ Window {
     ListView {
         anchors.fill: parent
 
-        model: [godRaysComponent, bloomEffectImage, rippleEffectImage, genieEffectImage]
+        model: [
+            glitchEffectImage,
+            godRaysComponent,
+            bloomEffectImage,
+            rippleEffectImage,
+            genieEffectImage]
 
         delegate: Loader {
             sourceComponent: modelData
@@ -271,4 +276,90 @@ Window {
 
         }
     }
+
+    Component {
+        id: glitchEffectImage
+
+        GlitchEffect {
+            id: glitchEffect
+            source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+
+            Column {
+                spacing: 8
+
+                // Time Rate
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "Time Rate"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0; to: 1; stepSize: 0.01
+                        value: glitchEffect.timeRate
+                        onMoved: glitchEffect.timeRate = value
+                    }
+                    Text {
+                        text: glitchEffect.timeRate.toFixed(2)
+                        color: "white"
+                    }
+                }
+
+                // Block Factor R
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "Block R"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0; to: 2; stepSize: 0.01
+                        value: glitchEffect.blockFactorR
+                        onMoved: glitchEffect.blockFactorR = value
+                    }
+                    Text {
+                        text: glitchEffect.blockFactorR.toFixed(2)
+                        color: "white"
+                    }
+                }
+
+                // Block Factor G
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "Block G"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0; to: 2; stepSize: 0.01
+                        value: glitchEffect.blockFactorG
+                        onMoved: glitchEffect.blockFactorG = value
+                    }
+                    Text {
+                        text: glitchEffect.blockFactorG.toFixed(2)
+                        color: "white"
+                    }
+                }
+
+                // Block Factor B
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "Block B"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0; to: 2; stepSize: 0.01
+                        value: glitchEffect.blockFactorB
+                        onMoved: glitchEffect.blockFactorB = value
+                    }
+                    Text {
+                        text: glitchEffect.blockFactorB.toFixed(2)
+                        color: "white"
+                    }
+                }
+            }
+        }
+    }
+
 }
