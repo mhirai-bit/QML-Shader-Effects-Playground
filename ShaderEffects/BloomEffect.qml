@@ -21,7 +21,7 @@ Item {
         width: srcImage.width
         height: srcImage.height
         layer.enabled: true
-        fragmentShader: "qrc:/BloomEffectBrightPass.frag.qsb"
+        fragmentShader: "qrc:/BrightPass.frag.qsb"
         property var sourceTexture: srcImage
         property real threshold: root.threshold
     }
@@ -56,7 +56,7 @@ Item {
         height: srcImage.height
         property var sourceTexture: srcImage
         property var bloomTexture: blurY
-        property real intensity: root.intensity
-        fragmentShader: "qrc:/BloomEffectCompose.frag.qsb"
+        property real u_intensity: root.intensity
+        fragmentShader: "qrc:/Compose.frag.qsb"
     }
 }

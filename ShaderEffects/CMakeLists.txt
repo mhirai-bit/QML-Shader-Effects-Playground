@@ -17,10 +17,12 @@ qt_add_shaders(ShaderEffects "shaders"
     FILES
         GenieEffect.vert
         RippleEffect.frag
-        BloomEffectBrightPass.frag
+        BrightPass.frag
         BloomEffectBlurX.frag
         BloomEffectBlurY.frag
-        BloomEffectCompose.frag
+        Compose.frag
+        GodRaysRadialBlur.frag
+        BrightPass_ColorPick.frag
 )
 
 qt_add_qml_module(ShaderEffects
@@ -29,6 +31,7 @@ qt_add_qml_module(ShaderEffects
     QML_FILES GenieEffect.qml
     QML_FILES RippleEffect.qml
     QML_FILES BloomEffect.qml
+    QML_FILES GodRaysEffect.qml
 )
 
 target_link_libraries(ShaderEffects PRIVATE Qt${QT_VERSION_MAJOR}::Quick)

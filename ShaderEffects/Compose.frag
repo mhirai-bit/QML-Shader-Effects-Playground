@@ -4,7 +4,7 @@ layout(location = 0) out vec4 fragColor;
 layout(std140, binding = 0) uniform buf {
     mat4 qt_Matrix;
     float qt_Opacity;
-    float intensity;
+    float u_intensity;
 } ubuf;
 
 layout(binding = 1) uniform sampler2D sourceTexture;
@@ -12,6 +12,6 @@ layout(binding = 2) uniform sampler2D bloomTexture;
 
 void main() {
     vec4 scene = texture(sourceTexture, qt_TexCoord0);
-    vec4 bloom = texture(bloomTexture, qt_TexCoord0) * ubuf.intensity;
+    vec4 bloom = texture(bloomTexture, qt_TexCoord0) * ubuf.u_intensity;
     fragColor = scene + bloom;
 }
