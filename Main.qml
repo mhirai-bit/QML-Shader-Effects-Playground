@@ -377,6 +377,13 @@ Window {
                 id: mosaicArea
                 source: sourceImage
 
+                // ドラッグ／リサイズ用プロパティ
+                property real startMouseX;  property real startMouseY
+                property real startX;       property real startY
+                property real startW;       property real startH
+                property real fixedOppX;    property real fixedOppY
+                property int  handleSize: 12
+
                 // 左エッジ
                 Rectangle {
                     x: 0; y: mosaicArea.handleSize
