@@ -24,6 +24,7 @@ qt_add_shaders(ShaderEffects "shaders"
         GodRaysRadialBlur.frag
         BrightPass_ColorPick.frag
         GlitchEffect.frag
+        PixelationEffect.frag
 )
 
 qt_add_qml_module(ShaderEffects
@@ -34,6 +35,7 @@ qt_add_qml_module(ShaderEffects
     QML_FILES BloomEffect.qml
     QML_FILES GodRaysEffect.qml
     QML_FILES GlitchEffect.qml
+    QML_FILES PixelationEffect.qml
 )
 
 target_link_libraries(ShaderEffects PRIVATE Qt${QT_VERSION_MAJOR}::Quick)
