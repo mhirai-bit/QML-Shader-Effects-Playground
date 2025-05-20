@@ -26,6 +26,7 @@ qt_add_shaders(ShaderEffects "shaders"
         GlitchEffect.frag
         PixelationEffect.frag
         BulgeEffect.frag
+        ChromaticAberration.frag
 )
 
 qt_add_qml_module(ShaderEffects
@@ -38,6 +39,7 @@ qt_add_qml_module(ShaderEffects
     QML_FILES GlitchEffect.qml
     QML_FILES PixelationEffect.qml
     QML_FILES BulgeEffect.qml
+    QML_FILES ChromaticAberration.qml
 )
 
 target_link_libraries(ShaderEffects PRIVATE Qt${QT_VERSION_MAJOR}::Quick)

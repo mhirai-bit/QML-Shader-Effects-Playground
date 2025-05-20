@@ -21,6 +21,7 @@ Window {
         anchors.fill: parent
 
         model: [
+            chromaticAberrationImage,
             distortionEffectImage,
             pixelationEffectImage,
             glitchEffectImage,
@@ -677,11 +678,11 @@ Window {
                     anchors.fill: parent
                     hoverEnabled: true
                     onPositionChanged: mouse => {
-                        bulgeEffect.u_center = Qt.vector2d(
-                            mouse.x / bulgeEffect.width,
-                            mouse.y / bulgeEffect.height
-                        )
-                    }
+                                           bulgeEffect.u_center = Qt.vector2d(
+                                               mouse.x / bulgeEffect.width,
+                                               mouse.y / bulgeEffect.height
+                                               )
+                                       }
                 }
 
                 Column {
@@ -692,7 +693,7 @@ Window {
                             color: "white"
                         }
                         Slider {
-                            from: 0.1; to: 2.0; stepSize: 0.1
+                            from: -2.0; to: 2.0; stepSize: 0.1
                             value: bulgeEffect.u_radius
                             onMoved: bulgeEffect.u_radius = value
                         }
@@ -720,6 +721,87 @@ Window {
                 }
             }
         }
+    }
 
+    Component {
+        id: chromaticAberrationImage
+
+        Item {
+            width: sourceImage.width
+            height: sourceImage.height
+            Image {
+                id: sourceImage
+                source: root.imageUrl
+                visible: false
+            }
+
+            ChromaticAberration {
+                id: chromaticAberration
+                width: sourceImage.width
+                height: sourceImage.height
+                sourceTexture: sourceImage
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onPositionChanged: mouse => {
+                                           chromaticAberration.u_focusPoint = Qt.vector2d(
+                                               mouse.x / chromaticAberration.width,
+                                               mouse.y / chromaticAberration.height
+                                               )
+                                       }
+                }
+            }
+
+            Column {
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "red offset"
+                        color: "white"
+                    }
+                    Slider {
+                        from: -0.01; to: 0.01; stepSize: 0.001
+                        value: chromaticAberration.u_redOffset
+                        onMoved: chromaticAberration.u_redOffset = value
+                    }
+                    Text {
+                        text: chromaticAberration.u_redOffset.toFixed(2)
+                        color: "white"
+                    }
+                }
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "green offset"
+                        color: "white"
+                    }
+                    Slider {
+                        from: -0.01; to: 0.01; stepSize: 0.001
+                        value: chromaticAberration.u_greenOffset
+                        onMoved: chromaticAberration.u_greenOffset = value
+                    }
+                    Text {
+                        text: chromaticAberration.u_greenOffset.toFixed(2)
+                        color: "white"
+                    }
+                }
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "blue offset"
+                        color: "white"
+                    }
+                    Slider {
+                        from: -0.01; to: 0.01; stepSize: 0.001
+                        value: chromaticAberration.u_blueOffset
+                        onMoved: chromaticAberration.u_blueOffset = value
+                    }
+                    Text {
+                        text: chromaticAberration.u_blueOffset.toFixed(2)
+                        color: "white"
+                    }
+                }
+            }
+        }
     }
 }
