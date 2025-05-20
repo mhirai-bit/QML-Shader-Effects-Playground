@@ -5,15 +5,23 @@ import ShaderEffects
 
 Window {
     id: root
-    width: 640
-    height: 480
+    width: dummy.implicitWidth
+    height: dummy.implicitHeight
     visible: true
     title: qsTr("Hello World")
+
+    readonly property url imageUrl: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/beach.jpg"
+    Image {
+        visible: false
+        id: dummy
+        source: root.imageUrl
+    }
 
     ListView {
         anchors.fill: parent
 
         model: [
+            distortionEffectImage,
             pixelationEffectImage,
             glitchEffectImage,
             godRaysComponent,
@@ -39,7 +47,7 @@ Window {
                 visible: false
                 width: parent.width
                 fillMode: Image.PreserveAspectFit
-                source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+                source: root.imageUrl
             }
 
             GenieEffect {
@@ -93,7 +101,7 @@ Window {
                 visible: false
                 width: parent.width
                 fillMode: Image.PreserveAspectFit
-                source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+                source: root.imageUrl
             }
 
             RippleEffect {
@@ -144,7 +152,7 @@ Window {
             intensity: intensitySlider.value
             threshold: thresholdSlider.value
 
-            source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+            source: root.imageUrl
         }
     }
 
@@ -153,6 +161,8 @@ Window {
 
         GodRaysEffect {
             id: godrayEffect
+            width: root.width
+            height: root.height
             color: "red"
             readonly property color textColor: Qt.rgba(
                                                    1 - godrayEffect.backgroundColor.r,
@@ -283,7 +293,7 @@ Window {
 
         GlitchEffect {
             id: glitchEffect
-            source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+            source: root.imageUrl
 
             Column {
                 spacing: 8
@@ -371,7 +381,7 @@ Window {
             height: root.height
             Image {
                 id: sourceImage
-                source: "qrc:/qt/qml/ShaderEffectsQMLPlayground/images/Mount_Kirkjufell_Iceland.jpg"
+                source: root.imageUrl
             }
             PixelationEffect {
                 id: mosaicArea
@@ -643,5 +653,73 @@ Window {
                 }
             }
         }
+    }
+
+    Component {
+        id: distortionEffectImage
+
+        Item {
+            width: sourceImage.width
+            height: sourceImage.height
+            Image {
+                id: sourceImage
+                source: root.imageUrl
+                visible: false
+            }
+
+            BulgeEffect {
+                id: bulgeEffect
+                sourceTexture: sourceImage
+                width: sourceImage.width
+                height: sourceImage.height
+
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onPositionChanged: mouse => {
+                        bulgeEffect.u_center = Qt.vector2d(
+                            mouse.x / bulgeEffect.width,
+                            mouse.y / bulgeEffect.height
+                        )
+                    }
+                }
+
+                Column {
+                    Row {
+                        spacing: 8
+                        Text {
+                            text: "Radius"
+                            color: "white"
+                        }
+                        Slider {
+                            from: 0.1; to: 2.0; stepSize: 0.1
+                            value: bulgeEffect.u_radius
+                            onMoved: bulgeEffect.u_radius = value
+                        }
+                        Text {
+                            text: bulgeEffect.u_radius.toFixed(2)
+                            color: "white"
+                        }
+                    }
+                    Row {
+                        spacing: 8
+                        Text {
+                            text: "Strength"
+                            color: "white"
+                        }
+                        Slider {
+                            from: -10.0; to: 10.0; stepSize: 0.1
+                            value: bulgeEffect.u_strength
+                            onMoved: bulgeEffect.u_strength = value
+                        }
+                        Text {
+                            text: bulgeEffect.u_strength.toFixed(2)
+                            color: "white"
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

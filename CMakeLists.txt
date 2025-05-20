@@ -17,6 +17,7 @@ qt_add_qml_module(appShaderEffectsQMLPlayground
     VERSION 1.0
     RESOURCES
         images/Mount_Kirkjufell_Iceland.jpg
+        images/beach.jpg
     QML_FILES Main.qml
 )
 

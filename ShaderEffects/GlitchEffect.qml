@@ -2,7 +2,7 @@ import QtQuick
 
 Item {
     id: root
-    width: 640; height: 480
+    width: sourceTexture.implicitWidth; height: sourceTexture.implicitHeight
     required property url source
 
     property alias timeRate: glitchEffect.u_timeRate

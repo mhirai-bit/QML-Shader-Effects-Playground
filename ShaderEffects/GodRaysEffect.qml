@@ -2,8 +2,7 @@
 import QtQuick
 
 Item {
-    id: root
-    width: 640; height: 480
+    id: root    
 
     property Item sourceItem: Rectangle {
         parent: root

@@ -1,11 +1,14 @@
 # The purpose of this repo
+
 I practice how to write various shader effects with QML.
 
 # Environment
+
 Mac OS
 Qt 6.9
 
 # Effects I want to practice
+
 | エフェクト名                                      | 説明                                              |
 | ------------------------------------------- | ----------------------------------------------- |
 | **Genie Effect**（ジーニーエフェクト）                 | ウィンドウや画像が吸い込まれるように変形しながら消えるエフェクト（MacのDockなどで有名） |
@@ -14,7 +17,7 @@ Qt 6.9
 | **God Rays (Light Rays)**（ゴッドレイ）            | 太陽や光源から光の筋が伸びるエフェクト                             |
 | **Glitch Effect**（グリッチエフェクト）                | 画面が乱れたり、デジタルノイズが走ったりするようなエフェクト                  |
 | **Pixelation Effect**（ピクセル化エフェクト）           | 映像を大きなピクセルに分割してモザイク状にする効果                       |
-| **Distortion Effect**（歪みエフェクト）              | 波打つような歪みやレンズ状のゆがみを発生させる効果                       |
+| **Bulge Effect**（バルジエフェクト）                  | 画面中央または任意の位置から円形に画面を膨張・収縮させるエフェクト               |
 | **Chromatic Aberration**（色収差）               | RGBが少しずれて表示され、古いカメラレンズのような効果                    |
 | **Radial Blur**（放射状ブラー）                     | 中心から放射状にぼやける効果（高速移動感やズーム感を表現）                   |
 | **Vignette Effect**（ビネット効果）                 | 画面の端が暗くなり、映画的な印象を与える効果                          |
