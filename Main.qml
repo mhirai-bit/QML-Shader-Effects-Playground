@@ -21,6 +21,7 @@ Window {
         anchors.fill: parent
 
         model: [
+            radialBlurImage,
             chromaticAberrationImage,
             distortionEffectImage,
             pixelationEffectImage,
@@ -799,6 +800,71 @@ Window {
                     Text {
                         text: chromaticAberration.u_blueOffset.toFixed(2)
                         color: "white"
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: radialBlurImage
+
+        Item {
+            width: sourceImage.width
+            height: sourceImage.height
+            Image {
+                id: sourceImage
+                source: root.imageUrl
+                visible: false
+            }
+            RadialBlur {
+                id: radialBlur
+                anchors.fill: parent
+                sourceTexture: sourceImage
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: mouse => {
+                        radialBlur.u_center = Qt.vector2d(
+                            mouse.x / radialBlur.width,
+                            mouse.y / radialBlur.height
+                            )
+                    }
+                }
+
+                Column {
+                    spacing: 8
+                    Row {
+                        spacing: 8
+                        Text {
+                            text: "sample count"
+                            color: "white"
+                        }
+                        Slider {
+                            from: 1; to: 100; stepSize: 1
+                            value: radialBlur.u_sampleCount
+                            onMoved: radialBlur.u_sampleCount = value
+                        }
+                        Text {
+                            text: radialBlur.u_sampleCount.toFixed(2)
+                            color: "white"
+                        }
+                    }
+                    Row {
+                        spacing: 8
+                        Text {
+                            text: "strength"
+                            color: "white"
+                        }
+                        Slider {
+                            from: 0; to: 0.05; stepSize: 0.0001
+                            value: radialBlur.u_strength
+                            onMoved: radialBlur.u_strength = value
+                        }
+                        Text {
+                            text: radialBlur.u_strength.toFixed(2)
+                            color: "white"
+                        }
                     }
                 }
             }
