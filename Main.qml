@@ -21,6 +21,7 @@ Window {
         anchors.fill: parent
 
         model: [
+            vignetteEffectImage,
             radialBlurImage,
             chromaticAberrationImage,
             distortionEffectImage,
@@ -865,6 +866,89 @@ Window {
                             text: radialBlur.u_strength.toFixed(2)
                             color: "white"
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: vignetteEffectImage
+
+        Item {
+            width: sourceImage.width
+            height: sourceImage.height
+            Image {
+                id: sourceImage
+                source: root.imageUrl
+                visible: false
+            }
+
+            VignetteEffect {
+                id: vignetteEffect
+                width: sourceImage.width
+                height: sourceImage.height
+                sourceTexture: sourceImage
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: mouse => {
+                        vignetteEffect.u_center = Qt.vector2d(
+                            mouse.x / vignetteEffect.width,
+                            mouse.y / vignetteEffect.height
+                            )
+                    }
+                }
+            }
+
+            Column {
+                spacing: 8
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "fall off"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0.0; to: 1.0; stepSize: 0.01
+                        value: vignetteEffect.u_falloff
+                        onMoved: vignetteEffect.u_falloff = value
+                    }
+                    Text {
+                        text: vignetteEffect.u_falloff.toFixed(2)
+                        color: "white"
+                    }
+                }
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "amount"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0.0; to: 1.0; stepSize: 0.01
+                        value: vignetteEffect.u_amount
+                        onMoved: vignetteEffect.u_amount = value
+                    }
+                    Text {
+                        text: vignetteEffect.u_amount.toFixed(2)
+                        color: "white"
+                    }
+                }
+                Row {
+                    spacing: 8
+                    Text {
+                        text: "radius"
+                        color: "white"
+                    }
+                    Slider {
+                        from: 0.0; to: 1.0; stepSize: 0.01
+                        value: vignetteEffect.u_radius
+                        onMoved: vignetteEffect.u_radius = value
+                    }
+                    Text {
+                        text: vignetteEffect.u_radius.toFixed(2)
+                        color: "white"
                     }
                 }
             }
