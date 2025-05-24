@@ -886,14 +886,13 @@ Window {
 
             VignetteEffect {
                 id: vignetteEffect
-                width: sourceImage.width
-                height: sourceImage.height
-                sourceTexture: sourceImage
+
+                sourceItem: sourceImage
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: mouse => {
-                        vignetteEffect.u_center = Qt.vector2d(
+                        vignetteEffect.center = Qt.vector2d(
                             mouse.x / vignetteEffect.width,
                             mouse.y / vignetteEffect.height
                             )
@@ -911,11 +910,11 @@ Window {
                     }
                     Slider {
                         from: 0.0; to: 1.0; stepSize: 0.01
-                        value: vignetteEffect.u_falloff
-                        onMoved: vignetteEffect.u_falloff = value
+                        value: vignetteEffect.falloff
+                        onMoved: vignetteEffect.falloff = value
                     }
                     Text {
-                        text: vignetteEffect.u_falloff.toFixed(2)
+                        text: vignetteEffect.falloff.toFixed(2)
                         color: "white"
                     }
                 }
@@ -927,11 +926,11 @@ Window {
                     }
                     Slider {
                         from: 0.0; to: 1.0; stepSize: 0.01
-                        value: vignetteEffect.u_amount
-                        onMoved: vignetteEffect.u_amount = value
+                        value: vignetteEffect.amount
+                        onMoved: vignetteEffect.amount = value
                     }
                     Text {
-                        text: vignetteEffect.u_amount.toFixed(2)
+                        text: vignetteEffect.amount.toFixed(2)
                         color: "white"
                     }
                 }
@@ -943,11 +942,11 @@ Window {
                     }
                     Slider {
                         from: 0.0; to: 1.0; stepSize: 0.01
-                        value: vignetteEffect.u_radius
-                        onMoved: vignetteEffect.u_radius = value
+                        value: vignetteEffect.radius
+                        onMoved: vignetteEffect.radius = value
                     }
                     Text {
-                        text: vignetteEffect.u_radius.toFixed(2)
+                        text: vignetteEffect.radius.toFixed(2)
                         color: "white"
                     }
                 }
