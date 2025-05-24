@@ -910,11 +910,11 @@ Window {
                     }
                     Slider {
                         from: 0.0; to: 1.0; stepSize: 0.01
-                        value: vignetteEffect.falloff
-                        onMoved: vignetteEffect.falloff = value
+                        value: vignetteEffect.fallOff
+                        onMoved: vignetteEffect.fallOff = value
                     }
                     Text {
-                        text: vignetteEffect.falloff.toFixed(2)
+                        text: vignetteEffect.fallOff.toFixed(2)
                         color: "white"
                     }
                 }
